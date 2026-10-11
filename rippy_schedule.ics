@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Rippy_VT//Stream Schedule//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:rippy-vt-stream-schedule@rippyvt.github.io
+DTSTAMP:20261011T220000Z
+DTSTART;TZID=America/Los_Angeles:20261012T194500
+DURATION:PT3H
+RRULE:FREQ=WEEKLY;BYDAY=MO,WE,FR
+SUMMARY:Rippy_VT Stream
+DESCRIPTION:Regular Rippy_VT stream. Schedule may change for special events or collaborations. Check Twitch for the latest status.
+LOCATION:https://www.twitch.tv/rippy_vt
+URL:https://www.twitch.tv/rippy_vt
+END:VEVENT
+END:VCALENDAR

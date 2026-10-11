@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://rippyvt.github.io/sitemap.xml

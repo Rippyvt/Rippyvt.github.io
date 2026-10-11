@@ -4,13 +4,28 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#120b1f" />
-  <meta name="description" content="Official home of Rippy_VT — comfy chaos, cute catboy energy, streams, art, socials and partnership info." />
+  <meta name="description" content="Official home of Rippy_VT — comfy catboy chaos, Twitch streams, art, socials, schedule and partnership information." />
+  <meta name="keywords" content="Rippy_VT, VTuber, catboy, Twitch streamer, Just Chatting, variety streamer" />
+  <meta name="author" content="Rippy_VT" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://rippyvt.github.io/" />
+  <meta property="og:title" content="Rippy_VT — Comfy Catboy Chaos" />
+  <meta property="og:description" content="Bubbly Just Chatting, cute voice moments, cozy chaos, art, streams and partnership info." />
+  <meta property="og:image" content="https://rippyvt.github.io/assets/hero-fragments.webp" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Rippy_VT — Comfy Catboy Chaos" />
+  <meta name="twitter:description" content="Certified catboy. Professional yapper. Questionably intelligent." />
+  <meta name="twitter:image" content="https://rippyvt.github.io/assets/hero-fragments.webp" />
   <title>Rippy_VT — Comfy Catboy Chaos</title>
+  <link rel="canonical" href="https://rippyvt.github.io/" />
   <link rel="icon" href="assets/rippy-icon.webp" />
+  <link rel="manifest" href="site.webmanifest" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
+  <script src="https://player.twitch.tv/js/embed/v1.js" defer></script>
+  <script src="script.js" defer></script>
 </head>
 <body>
   <div class="noise" aria-hidden="true"></div>
@@ -21,12 +36,12 @@
       <img src="assets/rippy-icon.webp" alt="Rippy icon" />
       <span>Rippy_VT</span>
     </a>
-
-    <button class="menu-toggle" aria-expanded="false" aria-controls="main-nav">☰</button>
+    <button class="menu-toggle" aria-expanded="false" aria-controls="main-nav" aria-label="Open navigation">☰</button>
     <nav id="main-nav" class="main-nav" aria-label="Primary navigation">
       <a href="#home" data-route="home" class="active">HOME</a>
       <a href="#about" data-route="about">ABOUT</a>
       <a href="#watch" data-route="watch">WATCH</a>
+      <a href="#schedule" data-route="schedule">SCHEDULE</a>
       <a href="#gallery" data-route="gallery">GALLERY</a>
       <a href="#partners" data-route="partners">PARTNERS</a>
       <a href="#links" data-route="links">SOCIALS</a>
@@ -40,7 +55,7 @@
       <div class="hero-vignette" aria-hidden="true"></div>
 
       <div class="hero-copy reveal">
-        <div class="eyebrow"><span class="live-dot"></span> COMFY CHAOS ONLINE</div>
+        <div class="eyebrow"><span class="live-dot"></span> <span id="home-status-label">COMFY CHAOS ONLINE</span></div>
         <h1>RIPPY<span>_VT</span></h1>
         <p class="hero-tagline">Certified Catboy • Professional Yapper • Questionably Intelligent</p>
         <p class="hero-sub">Bubbly Just Chatting, cute voice moments, cozy chaos, and the occasional decision that makes chat ask, “Rippy… why?”</p>
@@ -58,7 +73,7 @@
       <div class="floating-hud reveal delay-1" aria-label="Rippy stats joke">
         <div><small>ENERGY</small><b>MAX</b></div>
         <div><small>YAP LEVEL</small><b>99</b></div>
-        <div><small>INT STAT</small><b>???</b></div>
+        <button id="int-stat" type="button" title="Extensive testing has been inconclusive"><small>INT STAT</small><b id="int-value">???</b></button>
       </div>
 
       <button class="scroll-cue" data-route="about" aria-label="Go to about Rippy">Meet Rippy ↓</button>
@@ -68,7 +83,7 @@
       <div class="page-shell two-col">
         <div class="art-card reveal">
           <div class="orbit"></div>
-          <img class="about-gif" src="assets/rippy-happy.gif" alt="Animated Rippy character" />
+          <img id="mood-art" class="about-gif" src="assets/rippy-happy.gif" alt="Animated Rippy character" />
           <span class="sticker s1">♡ COMFY</span>
           <span class="sticker s2">✦ CHAOTIC</span>
           <span class="sticker s3">? SMART</span>
@@ -79,13 +94,26 @@
           <h2>Hi, I’m Rippy!</h2>
           <p class="lead">A pink “comfy” catboy VTuber known for bubbly energy, a cute voice, chaotic chatting streams, and confidently confused moments that chat loves to tease me for.</p>
           <p>My community shows up for laughs, personal stories, cozy chaos, and genuine interaction where everyone feels included, heard, and part of the joke.</p>
+
+          <div class="mood-picker" aria-label="Rippy mood selector">
+            <button type="button" class="mood active" data-mood="comfy" data-src="assets/rippy-happy.gif" data-line="Comfy mode: still capable of causing problems.">COMFY</button>
+            <button type="button" class="mood" data-mood="gremlin" data-src="assets/expressions/6.webp" data-line="Gremlin mode: decision quality has decreased.">GREMLIN</button>
+            <button type="button" class="mood" data-mood="confused" data-src="assets/expressions/9.webp" data-line="Confused mode: chat has begun explaining the obvious.">CONFUSED</button>
+            <button type="button" class="mood" data-mood="hype" data-src="assets/expressions/1.webp" data-line="Hype mode: volume warning recommended.">HYPE</button>
+          </div>
+          <p id="mood-line" class="mood-line">Comfy mode: still capable of causing problems.</p>
+
           <div class="trait-grid">
             <div><span>01</span><b>Just Chatting</b><small>Personality-first streams.</small></div>
             <div><span>02</span><b>Variety</b><small>Games when the gremlin calls.</small></div>
             <div><span>03</span><b>Fashion + Anime</b><small>Pink, expressive, character-driven.</small></div>
             <div><span>04</span><b>Community</b><small>Chat is part of the bit.</small></div>
           </div>
-          <a class="text-link" href="#gallery" data-route="gallery">See the Rippy art vault →</a>
+
+          <div class="about-actions">
+            <button class="btn ghost" id="open-reference" type="button">VIEW CHARACTER REFERENCE</button>
+            <a class="text-link" href="#gallery" data-route="gallery">See the Rippy art vault →</a>
+          </div>
         </div>
       </div>
     </section>
@@ -95,12 +123,12 @@
         <div class="section-heading reveal">
           <p class="section-kicker">TWITCH FEED</p>
           <h2>Come watch the chaos live.</h2>
-          <p>The player below follows <strong>rippy_vt</strong>. When Rippy is live, the stream plays here; when offline, Twitch shows the channel state.</p>
+          <p>The embedded Twitch player follows <strong>rippy_vt</strong>. The site also listens for Twitch’s online/offline player events and updates the status badge while this page is open.</p>
         </div>
 
         <div class="watch-grid reveal delay-1">
           <div class="player-card">
-            <div class="player-topbar"><span><i></i> RIPPY LIVE FEED</span><span>twitch.tv/rippy_vt</span></div>
+            <div class="player-topbar"><span><i id="status-dot"></i> <strong id="stream-status">CHECKING TWITCH…</strong></span><span>twitch.tv/rippy_vt</span></div>
             <div id="twitch-player" class="twitch-player">
               <div class="player-placeholder">
                 <img src="assets/rippy-idle.gif" alt="Rippy idle animation" />
@@ -115,11 +143,47 @@
               <h3>More Rippy?</h3>
               <p>Jump straight to Twitch for VODs, clips, follows, subs and the full channel experience.</p>
               <a class="btn primary full" href="https://www.twitch.tv/rippy_vt" target="_blank" rel="noopener">OPEN TWITCH</a>
-              <a class="btn ghost full" href="https://www.twitch.tv/rippy_vt/videos" target="_blank" rel="noopener">RECENT VIDEOS</a>
+              <a class="btn ghost full" href="https://www.twitch.tv/rippy_vt/videos" target="_blank" rel="noopener">RECENT VODS</a>
             </div>
           </aside>
         </div>
-        <p class="twitch-note">Twitch requires the site hostname for embeds, so the player is designed to load automatically once this site is hosted on GitHub Pages or a custom domain.</p>
+
+        <div class="content-strip reveal delay-2">
+          <a href="https://www.youtube.com/@Rippy_vt" target="_blank" rel="noopener"><small>YOUTUBE</small><b>Videos + Shorts</b><span>Watch uploads ↗</span></a>
+          <a href="https://www.tiktok.com/@rippy_vt" target="_blank" rel="noopener"><small>TIKTOK</small><b>Short-form chaos</b><span>Open feed ↗</span></a>
+          <a href="https://www.instagram.com/rippy_vt/" target="_blank" rel="noopener"><small>INSTAGRAM</small><b>Art + Reels</b><span>See updates ↗</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="page" id="schedule" data-page="schedule">
+      <div class="page-shell schedule-shell">
+        <div class="section-heading reveal">
+          <p class="section-kicker">STREAM SCHEDULE</p>
+          <h2>Three nights of scheduled yapping.</h2>
+          <p>Regular stream time is <strong>7:45 PM Pacific Time</strong>. The local-time helper below converts it for whoever is visiting.</p>
+        </div>
+
+        <div class="next-stream reveal delay-1">
+          <div>
+            <small>NEXT SCHEDULED STREAM</small>
+            <h3 id="next-stream-date">Calculating…</h3>
+            <p id="next-stream-local">Local time loading…</p>
+          </div>
+          <img src="assets/rippy-caramel.gif" alt="Rippy dancing" />
+        </div>
+
+        <div class="schedule-grid reveal delay-2">
+          <article><span>MON</span><h3>7:45 PM</h3><p>Pacific Time</p><b class="local-slot" data-day="1">Your local time: —</b></article>
+          <article><span>WED</span><h3>7:45 PM</h3><p>Pacific Time</p><b class="local-slot" data-day="3">Your local time: —</b></article>
+          <article><span>FRI</span><h3>7:45 PM</h3><p>Pacific Time</p><b class="local-slot" data-day="5">Your local time: —</b></article>
+        </div>
+
+        <div class="schedule-actions reveal">
+          <a class="btn primary" href="rippy_schedule.ics" download>ADD SCHEDULE TO CALENDAR</a>
+          <a class="btn ghost" href="https://www.twitch.tv/rippy_vt" target="_blank" rel="noopener">FOLLOW ON TWITCH</a>
+        </div>
+        <p class="microcopy">Schedule can change for special events, collabs or real-life gremlin interference. Twitch is the final source of truth.</p>
       </div>
     </section>
 
@@ -128,10 +192,17 @@
         <div class="section-heading reveal">
           <p class="section-kicker">THE ART VAULT</p>
           <h2>Every flavor of Rippy.</h2>
-          <p>Hover for a little movement. Click any piece for full view.</p>
+          <p>Filter the vault, hover for movement, and click any piece for full view.</p>
         </div>
-        <div class="gallery-grid reveal delay-1" id="gallery-grid"></div>
-        <p class="credit-note">Before public launch, add artist credits/links for commissioned pieces where applicable.</p>
+        <div class="gallery-filters reveal delay-1" role="group" aria-label="Gallery filters">
+          <button type="button" class="gallery-filter active" data-filter="all">ALL</button>
+          <button type="button" class="gallery-filter" data-filter="commission">COMMISSIONS</button>
+          <button type="button" class="gallery-filter" data-filter="model">MODEL</button>
+          <button type="button" class="gallery-filter" data-filter="emote">EMOTES</button>
+          <button type="button" class="gallery-filter" data-filter="archive">ARCHIVE</button>
+        </div>
+        <div class="gallery-grid reveal delay-2" id="gallery-grid"></div>
+        <p class="credit-note">Artist credit fields are ready in the gallery data. Add the artist names/links before presenting specific commissioned pieces as credited portfolio work.</p>
       </div>
     </section>
 
@@ -141,26 +212,58 @@
           <div>
             <p class="section-kicker">MEDIA KIT / PARTNERSHIPS</p>
             <h2>Let’s make something fun, memorable, and very Rippy.</h2>
-            <p>Rippy is a personality-first VTuber brand built around community interaction, cozy chaos, cute visual identity, and highly conversational streams.</p>
+            <p>Rippy is a personality-first VTuber brand built around community interaction, cozy chaos, a cute visual identity, and highly conversational streams.</p>
+            <div class="partner-actions">
+              <a class="btn primary" href="Rippy_VT_Media_Kit.pdf" target="_blank" rel="noopener">DOWNLOAD MEDIA KIT</a>
+              <a class="btn ghost" href="#contact" data-route="contact">START A CONVERSATION</a>
+            </div>
           </div>
           <img src="assets/party-rippy.webp" alt="Party Rippy character" />
         </div>
 
-        <div class="stats-grid reveal delay-1">
+        <div class="stats-grid five reveal delay-1">
           <div><b>3.2K+</b><span>Twitch Followers</span></div>
           <div><b>16</b><span>Avg. Live Viewership*</span></div>
+          <div><b>398</b><span>Hours Watched*</span></div>
           <div><b>70%</b><span>U.S. Audience*</span></div>
           <div><b>✓</b><span>Twitch Certified Creator</span></div>
         </div>
-        <p class="microcopy">*Current Twitch Creator Profile snapshot. Update these numbers as your channel grows.</p>
+        <p class="microcopy">*Current Twitch Creator Profile snapshot. These numbers should be refreshed as the channel grows.</p>
 
         <div class="partner-columns reveal delay-2">
           <article>
-            <h3>Good Fits</h3>
+            <h3>What Rippy Makes</h3>
+            <ul>
+              <li>Personality-first Just Chatting streams</li>
+              <li>Variety gaming + live reactions</li>
+              <li>Short-form clips built around personality moments</li>
+              <li>Community-driven conversation and humor</li>
+            </ul>
+          </article>
+          <article>
+            <h3>Good Brand Fits</h3>
             <div class="chips">
               <span>Gaming</span><span>Anime</span><span>Fashion</span><span>Tech</span><span>Creator Tools</span><span>Cozy Lifestyle</span>
             </div>
           </article>
+        </div>
+
+        <div class="audience-panel reveal">
+          <div>
+            <p class="section-kicker">AUDIENCE SNAPSHOT</p>
+            <h3>Primarily U.S.-based, English-speaking Twitch audience.</h3>
+            <p>The current Creator Profile shows 70% of channel viewership from the United States, with additional viewers in Canada, Australia, the United Kingdom and Mexico.</p>
+          </div>
+          <div class="country-bars" aria-label="Audience by country">
+            <div><span>United States</span><i><b style="width:70%"></b></i><strong>70%</strong></div>
+            <div><span>Canada</span><i><b style="width:6%"></b></i><strong>6%</strong></div>
+            <div><span>Australia</span><i><b style="width:3%"></b></i><strong>3%</strong></div>
+            <div><span>United Kingdom</span><i><b style="width:3%"></b></i><strong>3%</strong></div>
+            <div><span>Mexico</span><i><b style="width:3%"></b></i><strong>3%</strong></div>
+          </div>
+        </div>
+
+        <div class="partner-columns reveal">
           <article>
             <h3>Ways to Work Together</h3>
             <ul>
@@ -171,13 +274,19 @@
               <li>Affiliate / ambassador partnerships</li>
             </ul>
           </article>
+          <article>
+            <h3>Why It Works</h3>
+            <ul>
+              <li>Highly conversational format makes sponsor mentions natural</li>
+              <li>Strong visual identity for fashion, anime and lifestyle activations</li>
+              <li>Community interaction lets the product become part of the bit</li>
+              <li>Creator-led tone instead of generic ad reads</li>
+            </ul>
+          </article>
         </div>
 
         <div class="cta-panel reveal">
-          <div>
-            <small>BUSINESS INQUIRIES</small>
-            <h3>Have a campaign that feels Rippy?</h3>
-          </div>
+          <div><small>BUSINESS INQUIRIES</small><h3>Have a campaign that feels Rippy?</h3></div>
           <a class="btn primary" href="mailto:rippyvt@gmail.com?subject=Partnership%20Inquiry%20for%20Rippy_VT">rippyvt@gmail.com</a>
         </div>
       </div>
@@ -185,15 +294,13 @@
 
     <section class="page" id="links" data-page="links">
       <div class="page-shell socials-shell">
-        <div class="social-character reveal">
-          <img src="assets/rippy-idle.gif" alt="Rippy idle" />
-        </div>
+        <div class="social-character reveal"><img src="assets/rippy-idle.gif" alt="Rippy idle" /></div>
         <div class="social-copy reveal delay-1">
           <p class="section-kicker">FOLLOW THE GREMLIN</p>
           <h2>Rippy is everywhere.</h2>
           <div class="social-grid">
             <a href="https://www.twitch.tv/rippy_vt" target="_blank" rel="noopener"><b>Twitch</b><span>Live streams</span><i>↗</i></a>
-            <a href="https://www.youtube.com/@Rippy_vt" target="_blank" rel="noopener"><b>YouTube</b><span>Videos + VODs</span><i>↗</i></a>
+            <a href="https://www.youtube.com/@Rippy_vt" target="_blank" rel="noopener"><b>YouTube</b><span>Videos + Shorts</span><i>↗</i></a>
             <a href="https://www.tiktok.com/@rippy_vt" target="_blank" rel="noopener"><b>TikTok</b><span>Short-form chaos</span><i>↗</i></a>
             <a href="https://www.instagram.com/rippy_vt/" target="_blank" rel="noopener"><b>Instagram</b><span>Art + updates</span><i>↗</i></a>
             <a href="https://x.com/Rippy_VT" target="_blank" rel="noopener"><b>X / Twitter</b><span>Yapping continues</span><i>↗</i></a>
@@ -204,17 +311,30 @@
     </section>
 
     <section class="page" id="contact" data-page="contact">
-      <div class="page-shell contact-shell">
+      <div class="page-shell contact-shell wide-contact">
         <div class="contact-card reveal">
           <p class="section-kicker">BUSINESS INQUIRIES</p>
           <h2>Let’s talk.</h2>
-          <p>For sponsorships, collaborations, partnerships, appearances, or other business opportunities:</p>
-          <a class="email-big" href="mailto:rippyvt@gmail.com?subject=Business%20Inquiry%20for%20Rippy_VT">rippyvt@gmail.com</a>
-          <div class="contact-actions">
-            <button class="btn ghost" id="copy-email">COPY EMAIL</button>
-            <a class="btn primary" href="https://mail.google.com/mail/u/0/?fs=1&tf=cm&source=mailto&to=rippyvt@gmail.com" target="_blank" rel="noopener">OPEN GMAIL</a>
-          </div>
-          <p class="tiny">Please include your company/brand, campaign idea, expected deliverables, timeline, and budget range if available.</p>
+          <p>Fill this out and the site will prepare a structured email to <strong>rippyvt@gmail.com</strong>. No personal backend or API keys are exposed on GitHub Pages.</p>
+          <form id="business-form" class="business-form">
+            <div class="field-row">
+              <label>Name<input name="name" type="text" autocomplete="name" required /></label>
+              <label>Company / Brand<input name="company" type="text" required /></label>
+            </div>
+            <div class="field-row">
+              <label>Email<input name="email" type="email" autocomplete="email" required /></label>
+              <label>Campaign Type<select name="type"><option>Sponsorship</option><option>Collaboration</option><option>Affiliate / Ambassador</option><option>Appearance</option><option>Other</option></select></label>
+            </div>
+            <div class="field-row">
+              <label>Budget Range<input name="budget" type="text" placeholder="Optional" /></label>
+              <label>Timeline<input name="timeline" type="text" placeholder="Optional" /></label>
+            </div>
+            <label>Message<textarea name="message" rows="5" required placeholder="Tell me about the campaign, deliverables and what makes you think it fits Rippy."></textarea></label>
+            <div class="contact-actions">
+              <button class="btn primary" type="submit">PREPARE BUSINESS EMAIL</button>
+              <button class="btn ghost" id="copy-email" type="button">COPY EMAIL</button>
+            </div>
+          </form>
         </div>
         <div class="contact-art reveal delay-1">
           <img src="assets/open-rippy.webp" alt="Rippy chibi" />
@@ -224,6 +344,11 @@
     </section>
   </main>
 
+  <button class="rippy-companion" id="rippy-companion" type="button" aria-label="Talk to tiny Rippy">
+    <img src="assets/rippy-talking.gif" alt="Tiny Rippy" />
+    <span id="companion-bubble">pspspsps… click me</span>
+  </button>
+
   <footer>
     <span>© <span id="year"></span> Rippy_VT</span>
     <span>Comfy chaos, professionally packaged.</span>
@@ -232,10 +357,9 @@
   <dialog id="art-modal" class="art-modal">
     <button class="modal-close" aria-label="Close image">×</button>
     <img src="" alt="Full artwork" />
-    <p></p>
+    <div class="modal-meta"><b id="modal-title"></b><span id="modal-credit"></span></div>
   </dialog>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="script.js"></script>
 </body>
 </html>

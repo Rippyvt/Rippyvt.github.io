@@ -1,0 +1,12 @@
+{
+  "name": "Rippy_VT",
+  "short_name": "Rippy_VT",
+  "description": "Comfy catboy chaos, streams, art and partnerships.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0d0914",
+  "theme_color": "#120b1f",
+  "icons": [
+    {"src":"assets/rippy-icon.webp","sizes":"512x512","type":"image/webp","purpose":"any"}
+  ]
+}
