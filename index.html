@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#120b1f" />
+  <meta name="description" content="Official home of Rippy_VT — comfy chaos, cute catboy energy, streams, art, socials and partnership info." />
+  <title>Rippy_VT — Comfy Catboy Chaos</title>
+  <link rel="icon" href="assets/rippy-icon.webp" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="sparkle-field" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <a class="brand" href="#home" data-route="home" aria-label="Rippy home">
+      <img src="assets/rippy-icon.webp" alt="Rippy icon" />
+      <span>Rippy_VT</span>
+    </a>
+
+    <button class="menu-toggle" aria-expanded="false" aria-controls="main-nav">☰</button>
+    <nav id="main-nav" class="main-nav" aria-label="Primary navigation">
+      <a href="#home" data-route="home" class="active">HOME</a>
+      <a href="#about" data-route="about">ABOUT</a>
+      <a href="#watch" data-route="watch">WATCH</a>
+      <a href="#gallery" data-route="gallery">GALLERY</a>
+      <a href="#partners" data-route="partners">PARTNERS</a>
+      <a href="#links" data-route="links">SOCIALS</a>
+      <a href="#contact" data-route="contact">CONTACT</a>
+    </nav>
+  </header>
+
+  <main id="app">
+    <section class="page page-home active" id="home" data-page="home">
+      <div class="hero-bg" aria-hidden="true"></div>
+      <div class="hero-vignette" aria-hidden="true"></div>
+
+      <div class="hero-copy reveal">
+        <div class="eyebrow"><span class="live-dot"></span> COMFY CHAOS ONLINE</div>
+        <h1>RIPPY<span>_VT</span></h1>
+        <p class="hero-tagline">Certified Catboy • Professional Yapper • Questionably Intelligent</p>
+        <p class="hero-sub">Bubbly Just Chatting, cute voice moments, cozy chaos, and the occasional decision that makes chat ask, “Rippy… why?”</p>
+        <div class="hero-actions">
+          <a class="btn primary" href="#watch" data-route="watch">WATCH RIPPY</a>
+          <a class="btn ghost" href="#partners" data-route="partners">WORK WITH ME</a>
+        </div>
+        <div class="mini-status">
+          <span>♡ 3.2K+ Twitch followers</span>
+          <span>✦ Twitch Certified Creator</span>
+          <span>⌁ 70% U.S. audience</span>
+        </div>
+      </div>
+
+      <div class="floating-hud reveal delay-1" aria-label="Rippy stats joke">
+        <div><small>ENERGY</small><b>MAX</b></div>
+        <div><small>YAP LEVEL</small><b>99</b></div>
+        <div><small>INT STAT</small><b>???</b></div>
+      </div>
+
+      <button class="scroll-cue" data-route="about" aria-label="Go to about Rippy">Meet Rippy ↓</button>
+    </section>
+
+    <section class="page" id="about" data-page="about">
+      <div class="page-shell two-col">
+        <div class="art-card reveal">
+          <div class="orbit"></div>
+          <img class="about-gif" src="assets/rippy-happy.gif" alt="Animated Rippy character" />
+          <span class="sticker s1">♡ COMFY</span>
+          <span class="sticker s2">✦ CHAOTIC</span>
+          <span class="sticker s3">? SMART</span>
+        </div>
+
+        <div class="copy-card reveal delay-1">
+          <p class="section-kicker">MEET THE CATBOY</p>
+          <h2>Hi, I’m Rippy!</h2>
+          <p class="lead">A pink “comfy” catboy VTuber known for bubbly energy, a cute voice, chaotic chatting streams, and confidently confused moments that chat loves to tease me for.</p>
+          <p>My community shows up for laughs, personal stories, cozy chaos, and genuine interaction where everyone feels included, heard, and part of the joke.</p>
+          <div class="trait-grid">
+            <div><span>01</span><b>Just Chatting</b><small>Personality-first streams.</small></div>
+            <div><span>02</span><b>Variety</b><small>Games when the gremlin calls.</small></div>
+            <div><span>03</span><b>Fashion + Anime</b><small>Pink, expressive, character-driven.</small></div>
+            <div><span>04</span><b>Community</b><small>Chat is part of the bit.</small></div>
+          </div>
+          <a class="text-link" href="#gallery" data-route="gallery">See the Rippy art vault →</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="page" id="watch" data-page="watch">
+      <div class="page-shell watch-shell">
+        <div class="section-heading reveal">
+          <p class="section-kicker">TWITCH FEED</p>
+          <h2>Come watch the chaos live.</h2>
+          <p>The player below follows <strong>rippy_vt</strong>. When Rippy is live, the stream plays here; when offline, Twitch shows the channel state.</p>
+        </div>
+
+        <div class="watch-grid reveal delay-1">
+          <div class="player-card">
+            <div class="player-topbar"><span><i></i> RIPPY LIVE FEED</span><span>twitch.tv/rippy_vt</span></div>
+            <div id="twitch-player" class="twitch-player">
+              <div class="player-placeholder">
+                <img src="assets/rippy-idle.gif" alt="Rippy idle animation" />
+                <p>Loading Twitch player…</p>
+              </div>
+            </div>
+          </div>
+
+          <aside class="watch-side">
+            <div class="mini-card">
+              <img src="assets/rippy-dance.gif" alt="Rippy dancing" />
+              <h3>More Rippy?</h3>
+              <p>Jump straight to Twitch for VODs, clips, follows, subs and the full channel experience.</p>
+              <a class="btn primary full" href="https://www.twitch.tv/rippy_vt" target="_blank" rel="noopener">OPEN TWITCH</a>
+              <a class="btn ghost full" href="https://www.twitch.tv/rippy_vt/videos" target="_blank" rel="noopener">RECENT VIDEOS</a>
+            </div>
+          </aside>
+        </div>
+        <p class="twitch-note">Twitch requires the site hostname for embeds, so the player is designed to load automatically once this site is hosted on GitHub Pages or a custom domain.</p>
+      </div>
+    </section>
+
+    <section class="page" id="gallery" data-page="gallery">
+      <div class="page-shell">
+        <div class="section-heading reveal">
+          <p class="section-kicker">THE ART VAULT</p>
+          <h2>Every flavor of Rippy.</h2>
+          <p>Hover for a little movement. Click any piece for full view.</p>
+        </div>
+        <div class="gallery-grid reveal delay-1" id="gallery-grid"></div>
+        <p class="credit-note">Before public launch, add artist credits/links for commissioned pieces where applicable.</p>
+      </div>
+    </section>
+
+    <section class="page" id="partners" data-page="partners">
+      <div class="page-shell partner-shell">
+        <div class="partner-hero reveal">
+          <div>
+            <p class="section-kicker">MEDIA KIT / PARTNERSHIPS</p>
+            <h2>Let’s make something fun, memorable, and very Rippy.</h2>
+            <p>Rippy is a personality-first VTuber brand built around community interaction, cozy chaos, cute visual identity, and highly conversational streams.</p>
+          </div>
+          <img src="assets/party-rippy.webp" alt="Party Rippy character" />
+        </div>
+
+        <div class="stats-grid reveal delay-1">
+          <div><b>3.2K+</b><span>Twitch Followers</span></div>
+          <div><b>16</b><span>Avg. Live Viewership*</span></div>
+          <div><b>70%</b><span>U.S. Audience*</span></div>
+          <div><b>✓</b><span>Twitch Certified Creator</span></div>
+        </div>
+        <p class="microcopy">*Current Twitch Creator Profile snapshot. Update these numbers as your channel grows.</p>
+
+        <div class="partner-columns reveal delay-2">
+          <article>
+            <h3>Good Fits</h3>
+            <div class="chips">
+              <span>Gaming</span><span>Anime</span><span>Fashion</span><span>Tech</span><span>Creator Tools</span><span>Cozy Lifestyle</span>
+            </div>
+          </article>
+          <article>
+            <h3>Ways to Work Together</h3>
+            <ul>
+              <li>Sponsored stream integrations</li>
+              <li>Product showcases + live reactions</li>
+              <li>Short-form clips / social posts</li>
+              <li>Giveaways + community activations</li>
+              <li>Affiliate / ambassador partnerships</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="cta-panel reveal">
+          <div>
+            <small>BUSINESS INQUIRIES</small>
+            <h3>Have a campaign that feels Rippy?</h3>
+          </div>
+          <a class="btn primary" href="mailto:rippyvt@gmail.com?subject=Partnership%20Inquiry%20for%20Rippy_VT">rippyvt@gmail.com</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="page" id="links" data-page="links">
+      <div class="page-shell socials-shell">
+        <div class="social-character reveal">
+          <img src="assets/rippy-idle.gif" alt="Rippy idle" />
+        </div>
+        <div class="social-copy reveal delay-1">
+          <p class="section-kicker">FOLLOW THE GREMLIN</p>
+          <h2>Rippy is everywhere.</h2>
+          <div class="social-grid">
+            <a href="https://www.twitch.tv/rippy_vt" target="_blank" rel="noopener"><b>Twitch</b><span>Live streams</span><i>↗</i></a>
+            <a href="https://www.youtube.com/@Rippy_vt" target="_blank" rel="noopener"><b>YouTube</b><span>Videos + VODs</span><i>↗</i></a>
+            <a href="https://www.tiktok.com/@rippy_vt" target="_blank" rel="noopener"><b>TikTok</b><span>Short-form chaos</span><i>↗</i></a>
+            <a href="https://www.instagram.com/rippy_vt/" target="_blank" rel="noopener"><b>Instagram</b><span>Art + updates</span><i>↗</i></a>
+            <a href="https://x.com/Rippy_VT" target="_blank" rel="noopener"><b>X / Twitter</b><span>Yapping continues</span><i>↗</i></a>
+            <a href="mailto:rippyvt@gmail.com"><b>Email</b><span>Business only</span><i>✉</i></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="page" id="contact" data-page="contact">
+      <div class="page-shell contact-shell">
+        <div class="contact-card reveal">
+          <p class="section-kicker">BUSINESS INQUIRIES</p>
+          <h2>Let’s talk.</h2>
+          <p>For sponsorships, collaborations, partnerships, appearances, or other business opportunities:</p>
+          <a class="email-big" href="mailto:rippyvt@gmail.com?subject=Business%20Inquiry%20for%20Rippy_VT">rippyvt@gmail.com</a>
+          <div class="contact-actions">
+            <button class="btn ghost" id="copy-email">COPY EMAIL</button>
+            <a class="btn primary" href="https://mail.google.com/mail/u/0/?fs=1&tf=cm&source=mailto&to=rippyvt@gmail.com" target="_blank" rel="noopener">OPEN GMAIL</a>
+          </div>
+          <p class="tiny">Please include your company/brand, campaign idea, expected deliverables, timeline, and budget range if available.</p>
+        </div>
+        <div class="contact-art reveal delay-1">
+          <img src="assets/open-rippy.webp" alt="Rippy chibi" />
+          <div class="speech">“A business email? I can be professional. Probably.”</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>© <span id="year"></span> Rippy_VT</span>
+    <span>Comfy chaos, professionally packaged.</span>
+  </footer>
+
+  <dialog id="art-modal" class="art-modal">
+    <button class="modal-close" aria-label="Close image">×</button>
+    <img src="" alt="Full artwork" />
+    <p></p>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
