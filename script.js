@@ -14,6 +14,8 @@ function routeTo(name){
   window.scrollTo({top:0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'});
   if(target.dataset.page === 'watch') loadTwitch();
   if(target.dataset.page === 'schedule') updateSchedule();
+  document.body.dataset.page = target.dataset.page;
+  document.getElementById('rippy-companion')?.classList.toggle('home-hidden', target.dataset.page === 'home');
 }
 
 routes.forEach(el => el.addEventListener('click', e => {
@@ -135,6 +137,8 @@ const gallery = [
   ...Array.from({length:7},(_,i)=>({src:`assets/gallery/emotes/emote-${String(i+1).padStart(2,'0')}.webp`, title:`Rippy expression ${i+1}`, category:'emote', credit:'Expression art'})),
   ...Array.from({length:5},(_,i)=>({src:`assets/gallery/archive/archive-${String(i+1).padStart(2,'0')}.webp`, title:`Rippy archive ${i+1}`, category:'archive', credit:'Earlier / concept artwork'}))
 ];
+const socialArt = gallery.find(item => item.src.endsWith('/archive/archive-01.webp'));
+if(socialArt){ socialArt.title = 'Rippy artwork'; socialArt.credit = 'Art by @leraje06'; }
 const galleryGrid = document.getElementById('gallery-grid');
 const modal = document.getElementById('art-modal');
 const modalImg = modal?.querySelector('img');
@@ -173,13 +177,85 @@ modal?.querySelector('.modal-close')?.addEventListener('click', () => modal.clos
 modal?.addEventListener('click', e => { if(e.target === modal) modal.close(); });
 document.getElementById('open-reference')?.addEventListener('click', () => openArt('assets/rippy-reference.webp','Rippy character reference','Full character reference sheet'));
 
-// Business form: prepares the message in the visitor's email app.
+// Business inquiry form: fields adapt to the kind of opportunity.
 const form = document.getElementById('business-form');
+const inquiryType = document.getElementById('inquiry-type');
+const contextTitle1 = document.getElementById('context-title-1');
+const contextTitle2 = document.getElementById('context-title-2');
+const contextInput1 = document.getElementById('context-input-1');
+const contextInput2 = document.getElementById('context-input-2');
+const messageTitle = document.getElementById('message-title');
+const inquiryMessage = document.getElementById('inquiry-message');
+const formHelper = document.getElementById('form-helper');
+
+const inquiryConfigs = {
+  'Sponsorship': {
+    field1: ['CAMPAIGN BUDGET', 'e.g. $500–$1,000'],
+    field2: ['CAMPAIGN TIMELINE', 'Launch date / deadline'],
+    message: ['SPONSORSHIP DETAILS', 'Tell me about the product, requested deliverables, usage rights, exclusivity, key dates, or anything else I should know.'],
+    helper: 'Budget is optional, but sharing a range makes it much easier to understand the scope of a paid campaign.'
+  },
+  'Collaboration': {
+    field1: ['YOUR CHANNEL / PROJECT LINK', 'https://…'],
+    field2: ['PREFERRED DATE / WINDOW', 'e.g. November weekends'],
+    message: ['COLLAB IDEA', 'What would you like to make together? Include the platform, format, other creators involved, and any scheduling details.'],
+    helper: 'No budget field here — creator collaborations can just focus on the idea, fit, and timing.'
+  },
+  'Affiliate / Ambassador': {
+    field1: ['COMMISSION / COMPENSATION', 'e.g. 15% commission, gifted product, flat bonus'],
+    field2: ['PROGRAM TERM', 'Ongoing / 3 months / launch window'],
+    message: ['PROGRAM DETAILS', 'Tell me about the product, tracking method, payout structure, posting requirements, codes/links, and any minimum commitments.'],
+    helper: 'For affiliate or ambassador programs, compensation structure matters more than a traditional campaign budget.'
+  },
+  'Appearance / Event': {
+    field1: ['EVENT DATE', 'Date or date range'],
+    field2: ['LOCATION / VIRTUAL', 'City, venue, convention, or online'],
+    message: ['APPEARANCE DETAILS', 'Tell me about the event, audience, requested segment, expected time commitment, compensation, travel support, and any other requirements.'],
+    helper: 'Include compensation and travel details in the message when they apply.'
+  },
+  'Product Gifting / Review': {
+    field1: ['PRODUCT / SERVICE', 'What would you like Rippy to try?'],
+    field2: ['COMPENSATION', 'Gifted only / paid / affiliate / other'],
+    message: ['PRODUCT DETAILS', 'Tell me what the product is, what content you are requesting (if any), shipping or digital delivery details, and whether posting is required.'],
+    helper: 'Gifting does not automatically guarantee coverage; requested deliverables should be stated clearly.'
+  },
+  'Press / Podcast / Interview': {
+    field1: ['OUTLET / SHOW', 'Publication, podcast, channel, etc.'],
+    field2: ['RECORDING / PUBLISH DATE', 'Date or preferred window'],
+    message: ['INTERVIEW DETAILS', 'Tell me about the outlet, topic, format, expected length, whether it is live or recorded, and any questions or themes you plan to cover.'],
+    helper: 'A link to the outlet or show is helpful if it is not already obvious from the organization name above.'
+  },
+  'Other Business Inquiry': {
+    field1: ['TIMELINE', 'Optional'],
+    field2: ['BUDGET / COMPENSATION', 'Only if relevant'],
+    message: ['BUSINESS DETAILS', 'Tell me what you have in mind and include any context, links, timing, or terms that would help me understand the opportunity.'],
+    helper: 'Use this for anything that does not cleanly fit one of the categories above.'
+  }
+};
+
+let activeInquiryConfig = inquiryConfigs['Sponsorship'];
+function updateInquiryFields(){
+  activeInquiryConfig = inquiryConfigs[inquiryType?.value] || inquiryConfigs['Other Business Inquiry'];
+  if(contextTitle1) contextTitle1.textContent = activeInquiryConfig.field1[0];
+  if(contextInput1) contextInput1.placeholder = activeInquiryConfig.field1[1];
+  if(contextTitle2) contextTitle2.textContent = activeInquiryConfig.field2[0];
+  if(contextInput2) contextInput2.placeholder = activeInquiryConfig.field2[1];
+  if(messageTitle) messageTitle.textContent = activeInquiryConfig.message[0];
+  if(inquiryMessage) inquiryMessage.placeholder = activeInquiryConfig.message[1];
+  if(formHelper) formHelper.textContent = activeInquiryConfig.helper;
+}
+inquiryType?.addEventListener('change', updateInquiryFields);
+updateInquiryFields();
+
 form?.addEventListener('submit', e => {
   e.preventDefault();
   const data = Object.fromEntries(new FormData(form).entries());
   const subject = `[${data.type}] Business Inquiry for Rippy_VT — ${data.company}`;
-  const body = `Hello Rippy,\n\nName: ${data.name}\nCompany / Brand: ${data.company}\nReply Email: ${data.email}\nCampaign Type: ${data.type}\nBudget Range: ${data.budget || 'Not provided'}\nTimeline: ${data.timeline || 'Not provided'}\n\nCampaign Details:\n${data.message}\n\nThank you!`;
+  const contextLines = [
+    `${activeInquiryConfig.field1[0]}: ${data.context1 || 'Not provided'}`,
+    `${activeInquiryConfig.field2[0]}: ${data.context2 || 'Not provided'}`
+  ].join('\n');
+  const body = `Hello Rippy,\n\nName: ${data.name}\nCompany / Creator / Organization: ${data.company}\nReply Email: ${data.email}\nInquiry Type: ${data.type}\n${contextLines}\n\n${activeInquiryConfig.message[0]}:\n${data.message}\n\nThank you!`;
   window.location.href = `mailto:rippyvt@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 });
 

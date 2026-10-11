@@ -1,30 +1,22 @@
-# Rippy_VT GitHub Pages Site — V3
+# Rippy_VT GitHub Pages — V4
 
-This is the updated static site for `Rippyvt.github.io`.
+Static GitHub Pages site for **Rippy_VT**.
 
-## What changed in V3
-- Rewrote the homepage intro so it sounds more natural and more like Rippy.
-- Kept the "questionably intelligent" joke as an interactive easter egg instead of making it the main identity line.
-- Replaced the character reference image with the newly provided full reference sheet.
-- Added a working Character Reference button in the About section.
-- Removed public-facing technical/API/backend wording from the contact section.
-- Added a cleaner business inquiry form that prepares an email to `rippyvt@gmail.com`.
-- Added/fixed the Twitch status/player setup, Schedule page, mood selector, gallery filters, modal viewer, media-kit buttons, and tiny Rippy companion.
-- Added guards in JavaScript so optional elements do not break the rest of the site.
+## V4 updates
 
-## Upload to GitHub
-Upload the contents of this folder to the root of the `Rippyvt/Rippyvt.github.io` repository and overwrite matching files.
+- Fixed the home HUD / INT STAT collision by hiding Tiny Rippy on the home hero and giving the HUD more room.
+- Re-centered the Gremlin animation by cropping the original GIF's unused transparent canvas.
+- Reworked the business inquiry form so fields change based on inquiry type instead of showing a budget field for every situation.
+- Added Product Gifting / Review and Press / Podcast / Interview inquiry types.
+- Replaced the Socials-page character image with Rippy artwork supplied by the creator and credited it to @leraje06.
+- Added creator credits to About:
+  - 2D VTuber artist: @leraje06 — https://x.com/leraje06
+  - Live2D rigging: @Gwyn_Draig — https://x.com/Gwyn_Draig
+  - 3D model: @Talon137_vrc — https://x.com/Talon137_vrc
 
-The root should contain:
-- `index.html`
-- `styles.css`
-- `script.js`
-- `assets/`
-- `Rippy_VT_Media_Kit.pdf`
-- `rippy_schedule.ics`
-- `404.html`
-- `site.webmanifest`
-- `robots.txt`
-- `sitemap.xml`
+## Publish
 
-After committing, wait for GitHub Pages deployment to finish and hard refresh the site (`Ctrl + Shift + R`).
+Upload the **contents of this folder** to the root of `Rippyvt/Rippyvt.github.io` and commit to `main`.
+GitHub Pages should stay configured to deploy from `main` → `/ (root)`.
+
+After deployment finishes, hard refresh the live site (`Ctrl + Shift + R`).
