@@ -9,8 +9,8 @@ function routeTo(name){
   const target = pages.find(p => p.dataset.page === name) || pages[0];
   pages.forEach(p => p.classList.toggle('active', p === target));
   routes.forEach(a => a.classList.toggle('active', a.dataset.route === target.dataset.page && a.closest('nav')));
-  nav.classList.remove('open');
-  menu.setAttribute('aria-expanded','false');
+  nav?.classList.remove('open');
+  menu?.setAttribute('aria-expanded','false');
   window.scrollTo({top:0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'});
   if(target.dataset.page === 'watch') loadTwitch();
   if(target.dataset.page === 'schedule') updateSchedule();
@@ -24,7 +24,7 @@ routes.forEach(el => el.addEventListener('click', e => {
   routeTo(name);
 }));
 window.addEventListener('popstate', () => routeTo(location.hash.slice(1) || 'home'));
-menu.addEventListener('click', () => {
+menu?.addEventListener('click', () => {
   const isOpen = nav.classList.toggle('open');
   menu.setAttribute('aria-expanded', String(isOpen));
 });
@@ -33,10 +33,12 @@ function setStreamStatus(isOnline){
   const status = document.getElementById('stream-status');
   const dot = document.getElementById('status-dot');
   const home = document.getElementById('home-status-label');
-  dot.classList.toggle('online', isOnline);
-  dot.classList.toggle('offline', !isOnline);
-  status.textContent = isOnline ? 'RIPPY IS LIVE NOW' : 'RIPPY IS CURRENTLY OFFLINE';
-  home.textContent = isOnline ? 'RIPPY IS LIVE — COME YAP' : 'COMFY CHAOS ONLINE';
+  if(dot){
+    dot.classList.toggle('online', isOnline);
+    dot.classList.toggle('offline', !isOnline);
+  }
+  if(status) status.textContent = isOnline ? 'RIPPY IS LIVE NOW' : 'RIPPY IS CURRENTLY OFFLINE';
+  if(home) home.textContent = isOnline ? 'RIPPY IS LIVE — COME YAP' : 'COMFY CHAOS ONLINE';
   sessionStorage.setItem('rippyLive', isOnline ? '1' : '0');
 }
 
@@ -44,8 +46,9 @@ function loadTwitch(){
   if(twitchLoaded) return;
   const host = window.location.hostname;
   const mount = document.getElementById('twitch-player');
+  if(!mount) return;
   if(!host){
-    mount.innerHTML = `<div class="player-placeholder"><img src="assets/rippy-idle.gif" alt="Rippy idle"><p>The Twitch player loads after this site is hosted.</p></div>`;
+    mount.innerHTML = `<div class="player-placeholder"><img src="assets/rippy-idle.gif" alt="Rippy idle"><p>Open the published site to watch Twitch here.</p></div>`;
     return;
   }
   if(!window.Twitch || !window.Twitch.Player){
@@ -74,17 +77,19 @@ const moodArt = document.getElementById('mood-art');
 const moodLine = document.getElementById('mood-line');
 document.querySelectorAll('.mood').forEach(btn => btn.addEventListener('click', () => {
   document.querySelectorAll('.mood').forEach(b => b.classList.toggle('active', b === btn));
-  moodArt.src = btn.dataset.src;
-  moodLine.textContent = btn.dataset.line;
+  if(moodArt) moodArt.src = btn.dataset.src;
+  if(moodLine) moodLine.textContent = btn.dataset.line;
 }));
 
 // Questionably intelligent easter egg
 const intValues = ['???','404','3-ish','PENDING','ASK CHAT','PROBABLY','[REDACTED]','BIG BRAIN?'];
 let intIndex = 0;
-document.getElementById('int-stat').addEventListener('click', () => {
+const intStat = document.getElementById('int-stat');
+intStat?.addEventListener('click', () => {
   intIndex = (intIndex + 1) % intValues.length;
-  document.getElementById('int-value').textContent = intValues[intIndex];
-  showToast(intIndex === 1 ? 'Intelligence endpoint not found.' : 'Extensive testing remains inconclusive.');
+  const value = document.getElementById('int-value');
+  if(value) value.textContent = intValues[intIndex];
+  showToast(intIndex === 1 ? 'Intelligence not found.' : 'Testing remains inconclusive.');
 });
 
 // Schedule helper: iterate UTC moments and inspect them in Pacific time.
@@ -96,7 +101,7 @@ const streamDays = new Set([1,3,5]);
 function getPacificParts(date){
   const o = {};
   for(const p of pacificParts.formatToParts(date)) if(p.type !== 'literal') o[p.type] = p.value;
-  return {dow:dayMap[o.weekday], hour:+o.hour, minute:+o.minute, y:o.year, m:o.month, d:o.day};
+  return {dow:dayMap[o.weekday], hour:+o.hour, minute:+o.minute};
 }
 function nextOccurrence(targetDay=null){
   const step = 15*60*1000;
@@ -111,9 +116,11 @@ function nextOccurrence(targetDay=null){
 }
 function updateSchedule(){
   const next = nextOccurrence();
-  if(next){
-    document.getElementById('next-stream-date').textContent = next.toLocaleDateString(undefined,{weekday:'long',month:'long',day:'numeric'});
-    document.getElementById('next-stream-local').textContent = `${next.toLocaleTimeString(undefined,{hour:'numeric',minute:'2-digit'})} in your local time • 7:45 PM PT`;
+  const dateEl = document.getElementById('next-stream-date');
+  const localEl = document.getElementById('next-stream-local');
+  if(next && dateEl && localEl){
+    dateEl.textContent = next.toLocaleDateString(undefined,{weekday:'long',month:'long',day:'numeric'});
+    localEl.textContent = `${next.toLocaleTimeString(undefined,{hour:'numeric',minute:'2-digit'})} in your local time • 7:45 PM PT`;
   }
   document.querySelectorAll('.local-slot').forEach(el => {
     const d = nextOccurrence(+el.dataset.day);
@@ -130,39 +137,45 @@ const gallery = [
 ];
 const galleryGrid = document.getElementById('gallery-grid');
 const modal = document.getElementById('art-modal');
-const modalImg = modal.querySelector('img');
+const modalImg = modal?.querySelector('img');
 const modalTitle = document.getElementById('modal-title');
 const modalCredit = document.getElementById('modal-credit');
 
 function openArt(src,title,credit=''){
-  modalImg.src = src; modalImg.alt = title; modalTitle.textContent = title; modalCredit.textContent = credit;
+  if(!modal || !modalImg) return;
+  modalImg.src = src;
+  modalImg.alt = title;
+  if(modalTitle) modalTitle.textContent = title;
+  if(modalCredit) modalCredit.textContent = credit;
   modal.showModal();
 }
 
-gallery.forEach(item => {
-  const btn = document.createElement('button');
-  btn.className = 'gallery-item';
-  btn.type = 'button';
-  btn.dataset.category = item.category;
-  btn.setAttribute('aria-label',`Open ${item.title}`);
-  btn.innerHTML = `<span class="gallery-badge">${item.category.toUpperCase()}</span><img loading="lazy" src="${item.src}" alt="${item.title}">`;
-  btn.addEventListener('click', () => openArt(item.src,item.title,item.credit));
-  galleryGrid.appendChild(btn);
-});
+if(galleryGrid){
+  gallery.forEach(item => {
+    const btn = document.createElement('button');
+    btn.className = 'gallery-item';
+    btn.type = 'button';
+    btn.dataset.category = item.category;
+    btn.setAttribute('aria-label',`Open ${item.title}`);
+    btn.innerHTML = `<span class="gallery-badge">${item.category.toUpperCase()}</span><img loading="lazy" src="${item.src}" alt="${item.title}">`;
+    btn.addEventListener('click', () => openArt(item.src,item.title,item.credit));
+    galleryGrid.appendChild(btn);
+  });
+}
 
 document.querySelectorAll('.gallery-filter').forEach(filter => filter.addEventListener('click', () => {
   document.querySelectorAll('.gallery-filter').forEach(b => b.classList.toggle('active', b===filter));
   const cat = filter.dataset.filter;
-  galleryGrid.querySelectorAll('.gallery-item').forEach(item => item.classList.toggle('hidden', cat !== 'all' && item.dataset.category !== cat));
+  galleryGrid?.querySelectorAll('.gallery-item').forEach(item => item.classList.toggle('hidden', cat !== 'all' && item.dataset.category !== cat));
 }));
 
-modal.querySelector('.modal-close').addEventListener('click', () => modal.close());
-modal.addEventListener('click', e => { if(e.target === modal) modal.close(); });
-document.getElementById('open-reference').addEventListener('click', () => openArt('assets/rippy-reference.webp','Rippy character reference','Full character/model reference'));
+modal?.querySelector('.modal-close')?.addEventListener('click', () => modal.close());
+modal?.addEventListener('click', e => { if(e.target === modal) modal.close(); });
+document.getElementById('open-reference')?.addEventListener('click', () => openArt('assets/rippy-reference.webp','Rippy character reference','Full character reference sheet'));
 
-// Business form - creates a pre-filled mailto so no server secrets are needed.
+// Business form: prepares the message in the visitor's email app.
 const form = document.getElementById('business-form');
-form.addEventListener('submit', e => {
+form?.addEventListener('submit', e => {
   e.preventDefault();
   const data = Object.fromEntries(new FormData(form).entries());
   const subject = `[${data.type}] Business Inquiry for Rippy_VT — ${data.company}`;
@@ -170,7 +183,7 @@ form.addEventListener('submit', e => {
   window.location.href = `mailto:rippyvt@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 });
 
-document.getElementById('copy-email').addEventListener('click', async () => {
+document.getElementById('copy-email')?.addEventListener('click', async () => {
   try{ await navigator.clipboard.writeText('rippyvt@gmail.com'); showToast('Email copied ♡'); }
   catch{ showToast('rippyvt@gmail.com'); }
 });
@@ -188,19 +201,24 @@ const lines = [
   'Certified catboy behavior ♡'
 ];
 let lineIndex = 0;
-companion.addEventListener('click', () => {
+companion?.addEventListener('click', () => {
   lineIndex = (lineIndex + 1) % lines.length;
-  bubble.textContent = lines[lineIndex];
+  if(bubble) bubble.textContent = lines[lineIndex];
   companion.classList.add('chatty');
   clearTimeout(window.__companion);
   window.__companion = setTimeout(()=>companion.classList.remove('chatty'),2600);
 });
 
 function showToast(msg){
-  const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show');
-  clearTimeout(window.__toast); window.__toast = setTimeout(()=>t.classList.remove('show'),1800);
+  const t = document.getElementById('toast');
+  if(!t) return;
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(window.__toast);
+  window.__toast = setTimeout(()=>t.classList.remove('show'),1800);
 }
 
-document.getElementById('year').textContent = new Date().getFullYear();
+const year = document.getElementById('year');
+if(year) year.textContent = new Date().getFullYear();
 updateSchedule();
 routeTo(location.hash.slice(1) || 'home');

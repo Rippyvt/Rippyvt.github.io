@@ -1,76 +1,30 @@
-# Rippy_VT GitHub Pages Site — V2
+# Rippy_VT GitHub Pages Site — V3
 
-A static, no-build website for Rippy_VT. It uses plain HTML, CSS and JavaScript and is designed for `https://rippyvt.github.io/`.
+This is the updated static site for `Rippyvt.github.io`.
 
-## What V2 adds
+## What changed in V3
+- Rewrote the homepage intro so it sounds more natural and more like Rippy.
+- Kept the "questionably intelligent" joke as an interactive easter egg instead of making it the main identity line.
+- Replaced the character reference image with the newly provided full reference sheet.
+- Added a working Character Reference button in the About section.
+- Removed public-facing technical/API/backend wording from the contact section.
+- Added a cleaner business inquiry form that prepares an email to `rippyvt@gmail.com`.
+- Added/fixed the Twitch status/player setup, Schedule page, mood selector, gallery filters, modal viewer, media-kit buttons, and tiny Rippy companion.
+- Added guards in JavaScript so optional elements do not break the rest of the site.
 
-- Twitch player using Twitch's official interactive embed
-- Online/offline status updates while the Watch page is open
-- Stream schedule page with visitor-local time conversion
-- Downloadable `.ics` recurring calendar schedule
-- Filterable art gallery: commissions, model, emotes and archive
-- Rippy mood/expression selector
-- Character reference viewer
-- Richer sponsorship / media-kit section
-- Downloadable `Rippy_VT_Media_Kit.pdf`
-- Audience country breakdown
-- Business inquiry form that prepares an email without exposing API keys
-- SEO / social sharing meta tags
-- `robots.txt`, `sitemap.xml`, web manifest and custom 404 page
-- Tiny Rippy easter egg + rotating INT-stat joke
+## Upload to GitHub
+Upload the contents of this folder to the root of the `Rippyvt/Rippyvt.github.io` repository and overwrite matching files.
 
-## Update the live GitHub Pages site
-
-1. Open the `Rippyvt/Rippyvt.github.io` repository.
-2. Upload the contents of this folder to the repository root.
-3. Replace the existing files when GitHub asks.
-4. Commit directly to `main`.
-5. GitHub Pages should redeploy automatically.
-6. Hard refresh `https://rippyvt.github.io/` with `Ctrl + Shift + R` after the deployment turns green.
-
-## Files that must stay at repository root
-
+The root should contain:
 - `index.html`
 - `styles.css`
 - `script.js`
-- `404.html`
+- `assets/`
 - `Rippy_VT_Media_Kit.pdf`
 - `rippy_schedule.ics`
+- `404.html`
 - `site.webmanifest`
 - `robots.txt`
 - `sitemap.xml`
-- `assets/`
 
-## Easy things to update later
-
-### Stream schedule
-The visible schedule is in `index.html` and the local-time helper is in `script.js`.
-The current configuration is Monday / Wednesday / Friday at 7:45 PM America/Los_Angeles.
-If the schedule changes, also update `rippy_schedule.ics`.
-
-### Sponsor statistics
-Search `index.html` for:
-- `3.2K+`
-- `16`
-- `398`
-- `70%`
-
-Also regenerate/update `Rippy_VT_Media_Kit.pdf` when those metrics materially change.
-
-### Artist credits
-Gallery entries live in the `gallery` array in `script.js`. Replace `Artist credit to add` with the artist name and, if desired, add an artist URL to the data structure before launch/portfolio use.
-
-### Social links
-Search `index.html` for the Socials section. Current links are Twitch, YouTube, TikTok, Instagram, X and `rippyvt@gmail.com`.
-
-## Privacy / VTuber separation
-
-Keep this repository on the separate Rippy GitHub account. Do not add your personal GitHub username, personal email, real name, employer/school info, or IRL photos to this repository. Keep GitHub's private/noreply commit email enabled on this account.
-
-## Twitch embed note
-
-The Watch page uses Twitch's official JavaScript player and automatically supplies the current hostname as Twitch's required `parent` value. The live/offline badge is driven by `Twitch.Player.ONLINE` and `Twitch.Player.OFFLINE` events after the Watch page loads.
-
-## Business form note
-
-Because GitHub Pages is static, the inquiry form creates a pre-filled email in the visitor's mail client instead of sending data through a backend. This keeps the site simple and avoids publishing API keys. A service such as Formspree can be added later if you want true form submission without opening an email app.
+After committing, wait for GitHub Pages deployment to finish and hard refresh the site (`Ctrl + Shift + R`).
