@@ -79,7 +79,7 @@ const moodArt = document.getElementById('mood-art');
 const moodLine = document.getElementById('mood-line');
 document.querySelectorAll('.mood').forEach(btn => btn.addEventListener('click', () => {
   document.querySelectorAll('.mood').forEach(b => b.classList.toggle('active', b === btn));
-  if(moodArt) moodArt.src = btn.dataset.src;
+  if(moodArt) { moodArt.src = btn.dataset.src; moodArt.style.setProperty('--art-shift', btn.dataset.shift || '0px'); }
   if(moodLine) moodLine.textContent = btn.dataset.line;
 }));
 

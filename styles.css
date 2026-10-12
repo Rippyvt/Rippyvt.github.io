@@ -60,7 +60,7 @@ h1 span{color:var(--pink)}
 .art-card,.copy-card,.player-card,.mini-card,.contact-card,.contact-art,.partner-hero,.partner-columns article,.cta-panel{border:1px solid var(--line);background:linear-gradient(145deg,rgba(33,23,48,.82),rgba(20,13,31,.85));box-shadow:var(--shadow);backdrop-filter:blur(16px)}
 .art-card{position:relative;min-height:620px;border-radius:40px;display:grid;place-items:end center;overflow:hidden;background:radial-gradient(circle at 50% 30%,rgba(255,144,207,.25),transparent 35%),linear-gradient(160deg,#221630,#130d1f)}
 .art-card:before{content:"";position:absolute;inset:18px;border:1px dashed rgba(255,255,255,.1);border-radius:30px}
-.about-gif{position:relative;z-index:2;max-height:570px;max-width:94%;object-fit:contain;filter:drop-shadow(0 24px 24px rgba(0,0,0,.36))}
+.about-gif{position:relative;z-index:2;max-height:570px;max-width:94%;object-fit:contain;filter:drop-shadow(0 24px 24px rgba(0,0,0,.36));transform:translateX(var(--art-shift,0px));transition:transform .25s ease, opacity .2s ease}
 .orbit{position:absolute;width:360px;height:360px;border:1px solid rgba(255,183,222,.22);border-radius:50%;top:80px;animation:spin 14s linear infinite}.orbit:after{content:"✦";position:absolute;top:28px;right:25px;color:var(--pink);font-size:26px}
 .sticker{position:absolute;z-index:3;padding:8px 12px;border-radius:999px;background:#fff;color:#24172d;font:800 11px Fredoka;box-shadow:0 8px 24px rgba(0,0,0,.3)}.s1{left:25px;top:70px;transform:rotate(-7deg)}.s2{right:26px;top:165px;transform:rotate(6deg)}.s3{left:30px;bottom:65px;transform:rotate(5deg)}
 .copy-card{border-radius:34px;padding:clamp(28px,4vw,54px)}
