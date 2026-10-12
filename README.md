@@ -20,3 +20,10 @@ Upload the **contents of this folder** to the root of `Rippyvt/Rippyvt.github.io
 GitHub Pages should stay configured to deploy from `main` → `/ (root)`.
 
 After deployment finishes, hard refresh the live site (`Ctrl + Shift + R`).
+
+
+## V6 adjustments
+- Restored Comfy artwork to its original centered position.
+- Shifted Gremlin artwork right to center the character rather than the extended arm.
+- Shifted Confused artwork left to center the character rather than the tail.
+- Removed the bouncing “Meet Rippy / next page” cue from the home screen.
